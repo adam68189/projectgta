@@ -19,6 +19,10 @@ public class VisitEntity {
 	@Column(nullable = false)
 	private LocalDateTime time;
 
+	@ManyToOne
+	@JoinColumn(name="doctor_id", nullable = false)
+	private DoctorEntity doctor;
+
 	public Long getId() {
 		return id;
 	}
@@ -41,6 +45,22 @@ public class VisitEntity {
 
 	public void setTime(LocalDateTime time) {
 		this.time = time;
+	}
+
+	public DoctorEntity getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(DoctorEntity doctor) {
+		this.doctor = doctor;
+	}
+
+	public List<MedicalTreatmentEntity> getTreatments() {
+		return treatments;
+	}
+
+	public void setTreatments(List<MedicalTreatmentEntity> treatments) {
+		this.treatments = treatments;
 	}
 
 	// Relacja dwustronna

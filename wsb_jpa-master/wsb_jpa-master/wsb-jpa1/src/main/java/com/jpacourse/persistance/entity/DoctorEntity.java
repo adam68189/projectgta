@@ -11,17 +11,6 @@ import java.util.List;
 @Table(name = "DOCTOR")
 public class DoctorEntity {
 
-	@Entity
-	public class VisitEntity {
-
-		@OneToMany(
-				cascade = CascadeType.ALL, // default: empty
-				fetch = FetchType.EAGER // default: LAZY
-		)
-		@JoinColumn(name = "VISIT_ID")
-		private Collection<Address> addresses;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -100,6 +89,7 @@ public class DoctorEntity {
 		this.specialization = specialization;
 	}
 
+
 	// Relacja jednostronna od strony dziecka
 	@ManyToOne
 	@JoinColumn(name = "address_id", nullable = false)
@@ -110,5 +100,5 @@ public class DoctorEntity {
 
 	// Relacja jednostronna od strony rodzica
 	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<com.jpacourse.persistance.entity.VisitEntity> visits = new ArrayList<>();
+	private List<VisitEntity> visits = new ArrayList<>();
 }

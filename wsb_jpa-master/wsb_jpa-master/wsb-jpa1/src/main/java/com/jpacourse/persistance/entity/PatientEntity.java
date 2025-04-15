@@ -14,6 +14,8 @@ public class PatientEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	private Long pesel;
+
 	@Column(nullable = false)
 	private String firstName;
 
@@ -37,6 +39,14 @@ public class PatientEntity {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getPesel() {
+		return pesel;
+	}
+
+	public void setPesel(Long pesel) {
+		this.pesel = pesel;
 	}
 
 	public String getFirstName() {
@@ -87,6 +97,15 @@ public class PatientEntity {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+	public List<VisitEntity> getVisits() {
+		return visits;
+	}
+
+	public void setVisits(List<VisitEntity> visits) {
+		this.visits = visits;
+	}
+
+
 	// Relacja jednostronna od strony dziecka
 	@ManyToOne
 	@JoinColumn(name = "address_id", nullable = false)
@@ -99,6 +118,7 @@ public class PatientEntity {
 	// Relacja jednostronna od strony rodzica
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private List<VisitEntity> visits = new ArrayList<>();
+
 
 
 }
