@@ -41,5 +41,8 @@ public class MedicalTreatmentEntity {
 	public void setType(TreatmentType type) {
 		this.type = type;
 	}
-
+	// Relacja dwustronna
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "visit_id", nullable = false)
+	private VisitEntity visit;
 }

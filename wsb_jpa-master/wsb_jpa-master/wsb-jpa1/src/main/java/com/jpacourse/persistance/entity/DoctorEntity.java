@@ -4,6 +4,9 @@ import com.jpacourse.persistance.enums.Specialization;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "DOCTOR")
 public class DoctorEntity {
@@ -97,4 +100,15 @@ public class DoctorEntity {
 		this.specialization = specialization;
 	}
 
+	// Relacja jednostronna od strony dziecka
+	@ManyToOne
+	@JoinColumn(name = "address_id", nullable = false)
+	private AddressEntity address;
+
+	public AddressEntity getAddress() {return address;}
+	public void setAddress(AddressEntity address) {this.address = address;}
+
+	// Relacja jednostronna od strony rodzica
+	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<com.jpacourse.persistance.entity.VisitEntity> visits = new ArrayList<>();
 }
